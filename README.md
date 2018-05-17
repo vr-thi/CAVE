@@ -40,6 +40,8 @@ After building your project you can configure how your project should look like 
 
 Before starting your project, you might also need to start the VRPN server (run VRPN_Server/vrpn_server.exe). This is only necessary, if you use vrpn for tracking.
 
+For more information about the integration of VRPN see: [VRPN](https://github.com/vr-thi/CAVE/wiki/vrpn)
+
 ### 7. Optiona: Selectable objects
 
 Selectable objects should have a script component which inherits from InteractionTrigger. onFlystickEnter and onFlystickExit are the corresponding events which are triggered when the flystick points to the selectable object or does no longer point to it.
