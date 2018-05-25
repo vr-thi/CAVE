@@ -13,18 +13,6 @@ public class TopBlockPlacer : CollisionSynchronization
 		
 	}
 
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
 	public override void OnSynchronizedCollisionEnter(GameObject other)
     {
         TowerInteractivity tower = FindObjectOfType<TowerInteractivity>();

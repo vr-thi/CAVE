@@ -131,7 +131,7 @@ public class TowerInteractivity : MonoBehaviour
 
     public void createTower()
     {
-        if (NodeInformation.type.Equals("master"))
+        if (NodeInformation.isMaster())
         {
             setSizes();
 
@@ -326,7 +326,7 @@ public class TowerInteractivity : MonoBehaviour
             FirstSelected = gameObject;
             SelectedObj = gameObject;
             SelectedObj.GetComponent<Renderer>().material.color = Color.green;
-            if (NodeInformation.type.Equals("master"))
+            if (NodeInformation.isMaster())
                 changeRow(gameObject);
         }
         else if (gameObject == FirstSelected)

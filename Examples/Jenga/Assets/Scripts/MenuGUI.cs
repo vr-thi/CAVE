@@ -41,7 +41,7 @@ public class MenuGUI : MonoBehaviour
     void Start()
     {
 
-        if (NodeInformation.type.Equals("master"))
+        if (NodeInformation.isMaster())
         {
             state = MenuState.Main;
             refresh();
@@ -100,7 +100,7 @@ public class MenuGUI : MonoBehaviour
     {
         state = MenuState.Player;
         refresh();
-		if (!playSpawned && NodeInformation.type.Equals("master"))
+		if (!playSpawned && NodeInformation.isMaster())
 		{
 			NetworkServer.Spawn(twoPlayers);
 			NetworkServer.Spawn(threePlayers);
@@ -114,7 +114,7 @@ public class MenuGUI : MonoBehaviour
     {
         TowerInteractivity tower = FindObjectOfType<TowerInteractivity>();
 
-        tower.NrOfPlayers = Int32.Parse(nrOfPlayers.transform.FindChild("Text").GetComponent<Text>().text.Substring(0, 1));
+        tower.NrOfPlayers = Int32.Parse(nrOfPlayers.transform.Find("Text").GetComponent<Text>().text.Substring(0, 1));
 
 		tower.Players.Clear();
 
@@ -139,7 +139,7 @@ public class MenuGUI : MonoBehaviour
     {
         state = MenuState.Options;
         refresh();
-		if (!settingsSpawned && NodeInformation.type.Equals("master"))
+		if (!settingsSpawned && NodeInformation.isMaster())
         {
             NetworkServer.Spawn(musicBtn);
             NetworkServer.Spawn(backBtn);
@@ -151,7 +151,7 @@ public class MenuGUI : MonoBehaviour
     {
         state = MenuState.Credits;
         refresh();
-        if (!creditSpawned && NodeInformation.type.Equals("master"))
+        if (!creditSpawned && NodeInformation.isMaster())
         {
             NetworkServer.Spawn(creditText);
             NetworkServer.Spawn(backBtn);

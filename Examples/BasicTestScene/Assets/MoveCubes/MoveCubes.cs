@@ -12,7 +12,7 @@ public class MoveCubes : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-	    if (NodeInformation.type.Equals("slave"))
+	    if (!NodeInformation.isMaster())
 	    {
 	        enabled = false;
 	    }

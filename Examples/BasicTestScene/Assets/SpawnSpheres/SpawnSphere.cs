@@ -25,7 +25,7 @@ public class SpawnSphere : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (NodeInformation.type.Equals("master"))
+        if (NodeInformation.isMaster())
         {
             // Press w or q to change frame spawn time and s or a to change multiplicator.
             if (Input.GetKeyDown(KeyCode.W))

@@ -17,7 +17,7 @@ public class Reset : MonoBehaviour {
         if(Input.GetKeyDown(KeyCode.R))
         {
             //Destroy(gameObject);
-            if (NodeInformation.type.Equals("master"))
+            if (NodeInformation.isMaster())
             {
                 NetworkServer.Destroy(gameObject);
             }
