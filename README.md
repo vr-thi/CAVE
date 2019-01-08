@@ -56,7 +56,7 @@ For getting more information about a specific topic of our package you can find 
 
 ## Technical details
 
-* We developed the package using Unity 5.5.2f1, but our package should also work with future versions.
+* We developed the package using Unity 5.5.2f1 and tested it extensively under 2017.1, but our package should also work with future versions.
 * This project was originally build for Windows, but it might also work on Linux or Mac.
 * As basis for our project we used the [Unity Cluster Package](https://sourceforge.net/projects/unityclusterpackage/). Nevertheless we don't have much in common with it anymore.
 * For basic socket communication we used a slightly changed version of the [AwesomeSockets Library](https://github.com/nterry/AwesomeSockets) 
