@@ -33,11 +33,9 @@ Partial Class MainForm
         Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripSeparator()
         Me.BeendenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.SettingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SlaveConfigToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PathToVRPNServerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripSeparator()
         Me.AutostartOfMasterPCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.AutosaveConfignodexmlToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ScriptsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ÜberDasToolToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -168,7 +166,7 @@ Partial Class MainForm
         '
         Me.ÖffnenToolStripMenuItem.Name = "ÖffnenToolStripMenuItem"
         Me.ÖffnenToolStripMenuItem.Size = New System.Drawing.Size(155, 22)
-        Me.ÖffnenToolStripMenuItem.Text = "&Open Project ..."
+        Me.ÖffnenToolStripMenuItem.Text = "&Open project ..."
         '
         'ToolStripMenuItem4
         '
@@ -183,51 +181,35 @@ Partial Class MainForm
         '
         'SettingToolStripMenuItem
         '
-        Me.SettingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SlaveConfigToolStripMenuItem, Me.PathToVRPNServerToolStripMenuItem, Me.ToolStripMenuItem2, Me.AutostartOfMasterPCToolStripMenuItem, Me.AutosaveConfignodexmlToolStripMenuItem})
+        Me.SettingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PathToVRPNServerToolStripMenuItem, Me.ToolStripMenuItem2, Me.AutostartOfMasterPCToolStripMenuItem})
         Me.SettingToolStripMenuItem.Name = "SettingToolStripMenuItem"
         Me.SettingToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
         Me.SettingToolStripMenuItem.Text = "&Settings"
         '
-        'SlaveConfigToolStripMenuItem
-        '
-        Me.SlaveConfigToolStripMenuItem.Name = "SlaveConfigToolStripMenuItem"
-        Me.SlaveConfigToolStripMenuItem.Size = New System.Drawing.Size(318, 22)
-        Me.SlaveConfigToolStripMenuItem.Text = "&Path to Slave ..."
-        Me.SlaveConfigToolStripMenuItem.Visible = False
-        '
         'PathToVRPNServerToolStripMenuItem
         '
         Me.PathToVRPNServerToolStripMenuItem.Name = "PathToVRPNServerToolStripMenuItem"
-        Me.PathToVRPNServerToolStripMenuItem.Size = New System.Drawing.Size(318, 22)
+        Me.PathToVRPNServerToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
         Me.PathToVRPNServerToolStripMenuItem.Text = "Path to &VRPN-Server ..."
         '
         'ToolStripMenuItem2
         '
         Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(315, 6)
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(251, 6)
         '
         'AutostartOfMasterPCToolStripMenuItem
         '
         Me.AutostartOfMasterPCToolStripMenuItem.Checked = True
         Me.AutostartOfMasterPCToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
         Me.AutostartOfMasterPCToolStripMenuItem.Name = "AutostartOfMasterPCToolStripMenuItem"
-        Me.AutostartOfMasterPCToolStripMenuItem.Size = New System.Drawing.Size(318, 22)
+        Me.AutostartOfMasterPCToolStripMenuItem.Size = New System.Drawing.Size(254, 22)
         Me.AutostartOfMasterPCToolStripMenuItem.Text = "Autostart on the master computer"
-        '
-        'AutosaveConfignodexmlToolStripMenuItem
-        '
-        Me.AutosaveConfignodexmlToolStripMenuItem.Checked = True
-        Me.AutosaveConfignodexmlToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.AutosaveConfignodexmlToolStripMenuItem.Name = "AutosaveConfignodexmlToolStripMenuItem"
-        Me.AutosaveConfignodexmlToolStripMenuItem.Size = New System.Drawing.Size(318, 22)
-        Me.AutosaveConfignodexmlToolStripMenuItem.Text = "Autosave 'config-node.xml' on deploy/update"
-        Me.AutosaveConfignodexmlToolStripMenuItem.Visible = False
         '
         'ScriptsToolStripMenuItem
         '
         Me.ScriptsToolStripMenuItem.Name = "ScriptsToolStripMenuItem"
-        Me.ScriptsToolStripMenuItem.Size = New System.Drawing.Size(88, 20)
-        Me.ScriptsToolStripMenuItem.Text = "User's Scripts"
+        Me.ScriptsToolStripMenuItem.Size = New System.Drawing.Size(90, 20)
+        Me.ScriptsToolStripMenuItem.Text = "User's  scripts"
         Me.ScriptsToolStripMenuItem.Visible = False
         '
         'ToolStripMenuItem1
@@ -276,7 +258,7 @@ Partial Class MainForm
         Me.btn_ConfigDelete.Name = "btn_ConfigDelete"
         Me.btn_ConfigDelete.Size = New System.Drawing.Size(144, 23)
         Me.btn_ConfigDelete.TabIndex = 15
-        Me.btn_ConfigDelete.Text = "Delete Configuration ..."
+        Me.btn_ConfigDelete.Text = "Delete configuration ..."
         Me.btn_ConfigDelete.UseVisualStyleBackColor = True
         '
         'btn_ConfigSaveAs
@@ -286,7 +268,7 @@ Partial Class MainForm
         Me.btn_ConfigSaveAs.Name = "btn_ConfigSaveAs"
         Me.btn_ConfigSaveAs.Size = New System.Drawing.Size(144, 23)
         Me.btn_ConfigSaveAs.TabIndex = 14
-        Me.btn_ConfigSaveAs.Text = "Sa&ve Configuration As ..."
+        Me.btn_ConfigSaveAs.Text = "Sa&ve configuration as ..."
         Me.btn_ConfigSaveAs.UseVisualStyleBackColor = True
         '
         'lbl_computerName
@@ -512,7 +494,7 @@ Partial Class MainForm
         Me.btn_configSave.Name = "btn_configSave"
         Me.btn_configSave.Size = New System.Drawing.Size(144, 23)
         Me.btn_configSave.TabIndex = 4
-        Me.btn_configSave.Text = "&Save Configuration"
+        Me.btn_configSave.Text = "&Save configuration"
         Me.btn_configSave.UseVisualStyleBackColor = True
         '
         'Label6
@@ -684,9 +666,9 @@ Partial Class MainForm
         Me.lbl_projectname.AutoSize = True
         Me.lbl_projectname.Location = New System.Drawing.Point(15, 37)
         Me.lbl_projectname.Name = "lbl_projectname"
-        Me.lbl_projectname.Size = New System.Drawing.Size(86, 13)
+        Me.lbl_projectname.Size = New System.Drawing.Size(85, 13)
         Me.lbl_projectname.TabIndex = 7
-        Me.lbl_projectname.Text = "Name of Project:"
+        Me.lbl_projectname.Text = "Name of project:"
         '
         'txt_projectname
         '
@@ -766,9 +748,9 @@ Partial Class MainForm
         Me.Label8.AutoSize = True
         Me.Label8.Location = New System.Drawing.Point(15, 68)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(106, 13)
+        Me.Label8.Size = New System.Drawing.Size(84, 13)
         Me.Label8.TabIndex = 12
-        Me.Label8.Text = "Name of confignode:"
+        Me.Label8.Text = "Node config-file:"
         '
         'MainForm
         '
@@ -792,7 +774,7 @@ Partial Class MainForm
         Me.MinimumSize = New System.Drawing.Size(680, 464)
         Me.Name = "MainForm"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-        Me.Text = "CAVEUnity Deploy and Config Tool"
+        Me.Text = "CAVEUnity - Deploy and Config Tool"
         Me.grp_computerList.ResumeLayout(False)
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
@@ -870,7 +852,6 @@ Partial Class MainForm
     Friend WithEvents txt_scale As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents SettingToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents SlaveConfigToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents btm_removeComputer As Button
     Friend WithEvents btn_addComputer As Button
     Friend WithEvents PathToVRPNServerToolStripMenuItem As ToolStripMenuItem
@@ -885,7 +866,6 @@ Partial Class MainForm
     Friend WithEvents Label8 As Label
     Friend WithEvents ToolStripMenuItem4 As ToolStripSeparator
     Friend WithEvents ScriptsToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents AutosaveConfignodexmlToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents btn_ConfigSaveAs As Button
     Friend WithEvents btn_ConfigDelete As Button
 End Class

@@ -20,7 +20,6 @@ Public Class MainForm
     Dim button_click As Integer = 0
     Dim pf As New ProjectForm
     Dim P As Process
-    'Dim configfilepath As String = ".\config.xml"
     Dim scripts As String = ".\user_scripts\"
     Dim xmlreadconfig As XMLReader = New XMLReader
     Dim pathToSlave As String = ""
@@ -29,8 +28,7 @@ Public Class MainForm
     Dim vrpnServerPath As String = Application.StartupPath() & "\..\VRPN_Server\"
     Dim vrpnServerFile As String = "vrpn_server.exe"
     Dim AutostartOnMaster As Boolean = True
-    Dim autoSaveConfigNode As Boolean = True
-    Dim asNewCnfigNodeSaved As Boolean = False
+    Dim asNewConfigNodeSaved As Boolean = False
     Dim cmdThreadWithStartTaste As Boolean = False
 
     Private Sub clearAllFields()
@@ -87,8 +85,9 @@ Public Class MainForm
 
     Private Sub ÖffnenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ÖffnenToolStripMenuItem.Click
         If FolderBrowserDialog1.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+            'if new project shoud be open, delete first  the node-config.xml from the old project
             Me.DeleteConfigNode()
-            Me.asNewCnfigNodeSaved = False
+            Me.asNewConfigNodeSaved = False
 
             projectDirPath = FolderBrowserDialog1.SelectedPath
             projectName = projectDirPath.Substring(projectDirPath.LastIndexOf("\") + 1)
@@ -97,7 +96,7 @@ Public Class MainForm
             If IO.Directory.Exists(projectDirPath + projectName + streamingAssetsDir) Then
                 For Each item As String In IO.Directory.GetFiles(projectDirPath + projectName + streamingAssetsDir, "*.xml")
                     If IO.Path.GetFileName(item) = Me.nodeConfigFileName Then
-                        Me.asNewCnfigNodeSaved = False
+                        Me.asNewConfigNodeSaved = False
                         MsgBox("NEW IN THIS VERSION: " + vbNewLine + vbNewLine +
                            "The file 'node-config.xml' works only as workcopy of node configuration." + vbNewLine +
                            "Project node configuration should be saved as e.g.:" + vbNewLine +
@@ -106,7 +105,7 @@ Public Class MainForm
                             MsgBoxStyle.Information + MsgBoxStyle.OkOnly)
                         Me.SaveConfigNodeAs(item)
                     Else
-                        Me.asNewCnfigNodeSaved = True
+                        Me.asNewConfigNodeSaved = True
                     End If
                 Next
                 Me.LoadConfigFiles()
@@ -347,11 +346,8 @@ Public Class MainForm
     Private Sub UpdateText()
         Try
             pf.txt_projectForm.AppendText(System.Environment.NewLine() & Results)
-            'If Results.ToUpper.Contains("XCOPY ") Or Results.ToUpper.Contains("RMDIR ") Or Results.ToUpper.Contains("COPY ") Or Results.ToUpper.Contains("DEL ") Or Results.ToUpper.Contains("PSEXEC ") Then
             If Results.ToUpper.Contains("DONE ") Then
                 pf.ProgressBar1.PerformStep()
-                'progressCount = progressCount + 1
-                'pf.Text = progressCount.ToString
             End If
             pf.txt_projectForm.ScrollToCaret()
         Catch ex As Exception
@@ -390,7 +386,6 @@ Public Class MainForm
     End Sub
 
     Private Sub btn_startProject_Click(sender As Object, e As EventArgs) Handles btn_startProject.Click
-        'If File.Exists(".\MASTER_StartUnity.bat") Then
         If File.Exists(".\StartProject.bat") Then
             Dim pfd As New ProjectForm
 
@@ -417,24 +412,10 @@ Public Class MainForm
         End If
     End Sub
 
-    Private Sub checkStartUnity()
-        'Dim fileBAT As File
-        'Dim path As String = ".\SLAVE_StartUnity.bat"
-        'Dim content As String = "echo Startet Unityprojekt auf dem Slave-Rechner %computername% " + vbNewLine + "start " + pathToSlave + projectName + ".exe"
-        'fileBAT.WriteAllText(path, content)
-    End Sub
-
     Private Sub btn_deployProject_Click(sender As Object, e As EventArgs) Handles btn_deployProject.Click, btn_updateProject.Click
         Dim isUpdate As Boolean = sender Is Me.btn_updateProject
-        'Dim allowDeploy As Boolean = Me.autoSaveConfigNode
 
-        'If Not allowDeploy Then
-        '    allowDeploy = MsgBox("The 'config-node.xml' will be automaticly replace with current config-node configuration: " +
-        '                         vbNewLine + filename + " !" + vbNewLine + vbNewLine +
-        '                         "Would you like to continue?", MsgBoxStyle.Question + MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2) = MsgBoxResult.Yes
-        'End If
-        'If allowDeploy Then
-        If Me.asNewCnfigNodeSaved Then
+        If Me.asNewConfigNodeSaved Then
             Dim XMLWriter As New XMLWriter
             XMLWriter.SetAllComputers(projectDirPath + projectName + streamingAssetsDir + "node-config.xml", computers)
         End If
@@ -446,7 +427,6 @@ Public Class MainForm
             End If
 
             DisableButtons()
-            'checkStartUnity()
             pf = pfd
             pf.txt_projectForm.Text = ""
             pf.Text = IIf(isUpdate, "Update", "Deploy") + " project"
@@ -463,11 +443,10 @@ Public Class MainForm
         Else
             MsgBox("File: 'DeployProject.bat' not found!", MsgBoxStyle.Critical, "Not Found")
         End If
-        ' End If
     End Sub
 
     Private Sub ÜberDasToolToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ÜberDasToolToolStripMenuItem.Click
-        MsgBox("CAVEUnity Deploy & Config Tool V1.0.4" + vbNewLine + vbNewLine + "Visit us on GitHub: http://www.github.com/vr-thi/CAVE/", MsgBoxStyle.Information, "CAVEUnity")
+        MsgBox("CAVEUnity - Deploy & Config Tool V1.0.4" + vbNewLine + vbNewLine + "Visit us on GitHub: http://www.github.com/vr-thi/CAVE/", MsgBoxStyle.Information, "CAVEUnity")
     End Sub
 
     Private Sub opencmd_deploy(v As String)
@@ -480,22 +459,6 @@ Public Class MainForm
             act_computer.screenplane.scale.y = txt_scale.Text
             act_computer.screenplane.scale.z = txt_scale.Text
         End If
-    End Sub
-
-    Private Sub SlaveConfigToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles SlaveConfigToolStripMenuItem.Click
-        'If File.Exists(configfilepath) Then
-        '    Dim newPath As String = ""
-        '    Dim xmlRead As New XMLReader
-        '    pathToSlave = xmlRead.GetConfig(configfilepath, "pathToSlave")
-        '    newPath = InputBox("Please enter the path to the folder where the .exe-file is located:", "Slave Path", pathToSlave)
-        '    If newPath IsNot "" Then
-        '        If Not newPath.Equals(pathToSlave) Then
-        '            Dim xmlWrite As New XMLWriter
-        '            xmlWrite.SetConfig(configfilepath, "pathToSlave", newPath)
-        '            pathToSlave = newPath
-        '        End If
-        '    End If
-        'End If
     End Sub
 
     Private Sub btn_addComputer_Click(sender As Object, e As EventArgs) Handles btn_addComputer.Click
@@ -538,12 +501,6 @@ Public Class MainForm
 
     Private Sub MainForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Me.MakeUserScriptsMenu()
-        'If File.Exists(configfilepath) Then
-        '    pathToSlave = xmlreadconfig.GetConfig(configfilepath, "pathToSlave")
-        'Else
-        '    MsgBox("Error: config.xml not found!", MsgBoxStyle.Exclamation)
-        '    Me.Close()
-        'End If
     End Sub
 
     Private Sub MakeUserScriptsMenu()
@@ -602,7 +559,7 @@ Public Class MainForm
             res = False
             txt1 = "S T O P P E D"
             If File.Exists(vrpnServerPath & vrpnServerFile) Then
-                txt2 = " [path to start the server is okay]"
+                txt2 = " [path to the server is correct]"
                 col = Color.Orange
             Else
                 txt2 = " [bad or unknown path to the server]"
@@ -639,11 +596,6 @@ Public Class MainForm
     Private Sub ToolStripStatusLabel4_Click(sender As Object, e As EventArgs)
     End Sub
 
-    Private Sub AutosaveConfignodexmlToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AutosaveConfignodexmlToolStripMenuItem.Click
-        Me.autoSaveConfigNode = Not Me.autoSaveConfigNode
-        Me.AutosaveConfignodexmlToolStripMenuItem.Checked = Me.autoSaveConfigNode
-    End Sub
-
     Private Sub LoadConfigFiles()
         Me.cbConfigNodes.Items.Clear()
         For Each item As String In IO.Directory.GetFiles(projectDirPath + projectName + streamingAssetsDir, "*.xml")
@@ -668,7 +620,7 @@ Public Class MainForm
     End Sub
 
     Private Sub DeleteConfigNode()
-        If Me.asNewCnfigNodeSaved Then
+        If Me.asNewConfigNodeSaved Then
             If File.Exists(projectDirPath + projectName + streamingAssetsDir + "node-config.xml") Then
                 File.Delete(projectDirPath + projectName + streamingAssetsDir + "node-config.xml")
             End If
@@ -703,7 +655,7 @@ Public Class MainForm
                         FileCopy(aCurrConfigPath, Me.SaveFileDialog1.FileName)
                     Else
                         Rename(aCurrConfigPath, Me.SaveFileDialog1.FileName)
-                        Me.asNewCnfigNodeSaved = True
+                        Me.asNewConfigNodeSaved = True
                     End If
                 End If
             Else
@@ -727,29 +679,4 @@ Public Class MainForm
         End If
     End Sub
 
-    'Private Sub KillProjectOnClientsComputersToolStripMenuItem_Click(sender As Object, e As EventArgs)
-    '    If File.Exists(".\SLAVE_KillUnity.bat") Then
-    '        Dim pfd As New ProjectForm
-
-    '        If Application.OpenForms().OfType(Of ProjectForm).Any Then
-    '            pf.Close()
-    '        End If
-
-    '        DisableButtons()
-    '        pf = pfd
-    '        pf.txt_projectForm.Text = ""
-    '        pf.Text = "Kill Project on Clients' computers"
-    '        pf.Visible = True
-    '        progressCount = 0
-    '        pf.ProgressBar1.Value = 0
-    '        pf.ProgressBar1.Maximum = (ListBox1.Items.Count)
-    '        opencmd_start()
-    '        Dim CMDThread2 As New Threading.Thread(AddressOf CMDConfig)
-    '        CMDThread = CMDThread2
-    '        'start cmd thread
-    '        CMDThread.Start()
-    '    Else
-    '        MsgBox("SLAVE_KillUnity.bat not found", MsgBoxStyle.Critical, "Not Found")
-    '    End If
-    'End Sub
 End Class
