@@ -7,7 +7,7 @@
 ## V.1.0.3
 * Added possibility to work with more as one `node-config.xml`-file. It is possible to work in master-slave-system (e.g. `node-config-cave.xml`) or only on master-pc (e.g. `node-config-local.xml`) for project's testing und debuging.
 * Added options **Configuration save as...** and **Delete configuration**.
-* Added menu's option **User's Scripts**.
+* Added menu's option **User's scripts** and a sample script `KillUnityOnClients.bat`.
 
 
 ## V.1.0.2
