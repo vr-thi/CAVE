@@ -1,5 +1,6 @@
 @echo off
 
+setlocal
 set PrjPath=%1
 set PrjName=%2
 set StartOnMaster=%3
@@ -28,3 +29,4 @@ if /i "%StartOnMaster%" == "AutoStartOnMaster" (
 ) else (
 	echo ***** The user should start the unity project on Master-PC manual !!
 )
+endlocal
