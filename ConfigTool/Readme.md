@@ -12,7 +12,7 @@
 
 ## V.1.0.2
 * Added menu's option **Settings / Autostart on the master computer** and state of this option in state bar.
-* Removed menu's option **Settings / Slave path config**. The path should be add/define directly in scripts.
+* Removed menu's option **Settings / Path to Slave...**. The path should be add/define directly in scripts.
 * Removed `config.xml`-file.
 
 
